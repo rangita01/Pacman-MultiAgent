@@ -344,10 +344,24 @@ def betterEvaluationFunction(currentGameState):
       Your extreme ghost-hunting, pellet-nabbing, food-gobbling, unstoppable
       evaluation function (question 5).
 
-      DESCRIPTION: <write something here so we know what you did>
+      DESCRIPTION: <Basically this algorithm really focuses on moving towards food.>
     """
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    foodPos = currentGameState.getFood().asList() 
+    foodDist = [] 
+    ghostStates = currentGameState.getGhostStates() 
+    capPos = currentGameState.getCapsules()  
+    currentPos = list(currentGameState.getPacmanPosition()) 
+ 
+    for food in foodPos:
+        food2pacmanDist = manhattanDistance(food, currentPos)
+        foodDist.append(-1*food2pacmanDist)
+        
+    if not foodDist:
+        foodDist.append(0)
+
+    return max(foodDist) + currentGameState.getScore() 
 
 # Abbreviation
 better = betterEvaluationFunction
